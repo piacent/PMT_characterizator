@@ -74,6 +74,7 @@ def run_batch(
     debug=False,
     max_overlay=100,
     outdir="batch_output",
+    time_cut = 2.5
 ):
     os.makedirs(outdir, exist_ok=True)
 
@@ -119,6 +120,7 @@ def run_batch(
                 led_pulse=led_pulse,
                 r_divider_mohm=r_divider,
                 nevent_meta=nevent_meta,
+                lower_time_cut=time_cut
             )
             all_summaries.append(summary)
 
@@ -346,6 +348,7 @@ def main():
     parser.add_argument("--debug", action="store_true", help="Save debug plots for each run")
     parser.add_argument("--max-overlay", type=int, default=100, help="Max waveforms in overlay debug plot")
     parser.add_argument("--outdir", type=str, default="batch_output", help="Output directory")
+    parser.add_argument("--time-cut", type=float, default=2.5, help="select waveforms with larger times")
 
     args = parser.parse_args()
 
@@ -364,6 +367,7 @@ def main():
         debug=args.debug,
         max_overlay=args.max_overlay,
         outdir=args.outdir,
+        time_cut = 2.5
     )
 
 
